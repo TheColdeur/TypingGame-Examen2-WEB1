@@ -1,0 +1,142 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: quicksand, sans-serif;
+}
+:root{
+    --primaryColor: #2C3930;
+    --secondaryColor: #3F4F44;
+    --tertiaryColor: #A27B5C;
+    --quaternaryColor: #DCD7C9;
+    --quinaryColor: #F2E2B1;
+}
+body{
+    padding: 5vh 5vw;
+    background: linear-gradient(var(--primaryColor));
+}
+
+
+/*------ hearder css ------*/
+header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 2em;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.logo i{
+    font-size: 2.5em;
+    color: var(--tertiaryColor);
+}
+.logo h1{
+    font-size: 2em;
+    color: var(--quaternaryColor);
+}
+
+
+/*---- container css -----*/
+.container{
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    height: 100%;
+    width: 100%;
+}
+.container>div{
+    height: 70vh;
+}
+.info{
+    display: flex;
+    gap: 20px;
+    color: var(--tertiaryColor);
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.game{
+    height: 50vh;
+    padding: .5em 2em;
+    overflow: hidden;
+    border: 2px solid var(--quinaryColor);
+    border-radius: 10px;
+}
+.input-field{
+    opacity: 0;
+    background-color: #fff;
+}
+.typing-text{
+    color: var(--quaternaryColor);
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+.word{
+    display: inline-block;
+}
+.letter{
+    opacity: .5;
+    position: relative;
+}
+.letter.correct{
+    color: var(--quaternaryColor);
+    opacity: 1;
+}
+.letter.incorrect{
+    background: #8E1616;
+    border-radius: 5px;
+    height: 1.8em;
+    opacity: 1;
+}
+.letter.current{
+    height: auto;
+    width: min-content;
+    background: var(--secondaryColor);
+    border-radius: 5px;
+}
+.typing-text p span.current::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: var(--quinaryColor);
+    width: 100%;
+    height: 2px;
+    animation: blink 1s infinite ease;
+}
+@keyframes blink {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+.option{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+}
+.option button{
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: .8em 1em;
+    cursor: pointer;
+}
+.option i{
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--quaternaryColor);
+}
+.mode{
+    display: flex;
+    justify-content: center;
+}

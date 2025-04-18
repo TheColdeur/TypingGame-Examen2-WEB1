@@ -1,55 +1,84 @@
 const typingText = document.querySelector('.typing-text p');
 const inputField = document.querySelector('.input-field');
-const cursor = document.querySelector('.cursor');
+const wpmResult = document.querySelector('.WPM span');
+const mistakesResult = document.querySelector('.mistakes span');
+const time = document.querySelector('.time span');
 
-let wordCount = word1.length;
+let currentTime = startTime = 30;
+let wordCount = word2.length;
 let characterIndex = 0;
+let mistakes = 0;
+let firstChar = 0;
+
+time.innerHTML = startTime;
+
+const getWpm = () => {
+    const wpm = ((((characterIndex + 1) - mistakes) / 5) / (startTime - currentTime))*60;
+    return Math.round(wpm);
+}
 
 const randomWord = () => {
     const randomIndex = Math.floor(Math.random() * wordCount);
-    return word1[randomIndex];
+    return word2[randomIndex];
 }
 const newGame = () => {
     document.addEventListener('keydown', () => inputField.focus());
     typingText.addEventListener('click', () => inputField.focus());
     typingText.innerHTML = '';
-    for (let i=0; i<=25; i++){
-        const space = ' ';
+    for (let i=0; i<=100; i++){
         let word = '';
-        if (i!=200){
-            word = `<div class="word">
-            <span class="letter">${randomWord().split('').join('</span><span class="letter">')}</span><span class="letter">${space}</span>
-            </div>
-            `;
-        } else {
-            word = `<div class="word">
-            <span class="letter">${randomWord().split('').join('</span><span class="letter">')}</span>
-            </div>`;
-        }
-        typingText.innerHTML += word;
+        word = `<div class="word"><span class="letter">${randomWord().split('').join('</span><span class="letter">')}</span></div>`;
+        typingText.innerHTML += word + `<span class="letter"> </span>`;
     }
-    typingText.querySelectorAll('.letter')[0].classList.add('current');
+    typingText.querySelector('.letter').classList.add('current');
 }
-const typing = () => {
+const isTyping = (event) => {
     const letter = typingText.querySelectorAll('.letter');
-    let typedChar = inputField.value.split('')[characterIndex];
-    if (typedChar == null){
-        characterIndex--;
-        letter[characterIndex].classList.remove('correct');
-        letter[characterIndex].classList.remove('incorrect');
-    } else{
-        if (letter[characterIndex].innerHTML === typedChar){
-            letter[characterIndex].classList.add('correct');
-        } else{
-            letter[characterIndex].classList.add('incorrect');
+    let typedChar = event.key;
+    if (characterIndex < letter.length - 1 && currentTime > 0){
+        if (firstChar == 0){
+            timeLeft = setInterval(startTimer, 1000);
+            firstChar = true;
         }
-        characterIndex++;
+        if (typedChar === 'Backspace'){
+            characterIndex--;
+            if (letter[characterIndex].classList.contains('incorrect')){
+                mistakes--;
+            }
+            letter[characterIndex].classList.remove('correct');
+            letter[characterIndex].classList.remove('incorrect');
+        } else if (typedChar == 'Shift'){
+            characterIndex;
+        } else{
+            if (letter[characterIndex].innerHTML === typedChar){
+                letter[characterIndex].classList.add('correct');
+            } else{
+                letter[characterIndex].classList.add('incorrect');
+                mistakes++;
+            }
+            characterIndex++;
+        }
+        mistakesResult.innerHTML = mistakes;
+        wpmResult.innerHTML = getWpm();
+        if (wpmResult.innerHTML == 'Infinity' || wpmResult.innerHTML == null){
+            wpmResult.innerHTML = 0;
+        }
+    } else{
+        inputField.innerHTML = '';
+        clearInterval(timeLeft);
+        window.location.href = './result.html';
     }
     letter.forEach(span => span.classList.remove("current"));
     letter[characterIndex].classList.add("current");
 }
+const startTimer = () => {
+    time.innerHTML = '';
+    if (currentTime > 0){
+        currentTime--;
+        time.innerHTML += currentTime;
+    } else{
+        time.innerHTML = 0;
+    }
+}
 newGame();
-inputField.addEventListener('input', typing);
-document.addEventListener('keyup', (key) => {
-    console.log(key);
-});
+inputField.addEventListener('keydown', isTyping);

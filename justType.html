@@ -11,6 +11,7 @@
     <title>justType - Typing game</title>
 </head>
 <body>
+    <div class="background_style"></div>
     <header>
         <div class="logo">
             <i class="fa-solid fa-keyboard"></i>
@@ -21,10 +22,21 @@
         <div class="container">
             <div class="info">
                 <div class="time">
-                    <p>30</p>
+                    <p>Time : <span></span>s</p>
                 </div>
                 <div class="WPM">
-                    <p>0</p>
+                    <p>WPM : <span>0</span></p>
+                </div>
+                <div class="mistakes">
+                    <p>Mistakes : <span>0</span></p>
+                </div>
+                <div class="description">
+                    <div class="name">
+                        <h4></h4>
+                    </div>
+                    <div class="description-text">
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <div class="game">
@@ -35,11 +47,13 @@
             </div>
             <div class="mode">
                 <div class="mode-select">
-                    <select name="" id="" class="mode-select-name">
-                        <option value="text">Text</option>
-                        <option value="time">Time</option>
-                        <option value="nofail">No Fail</option>
-                    </select>
+                    <p><i class="fa-solid fa-circle-check"></i>SELECT MODE</p>
+                    <ul>
+                        <li class="mode-time"><i class="fa-solid fa-clock"></i>Time</li>
+                        <li class="mode-text"><i class="fa-solid fa-font"></i>Text</li>
+                        <li class="mode-no-fail"><i class="fa-solid fa-xmark"></i>No fail</li>
+                        <li class="mode-chill"><i class="fa-solid fa-gamepad"></i>Chill</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -56,5 +70,6 @@
     </footer>
     <script src="./assets/word.js"></script>
     <script src="./assets/justType.js"></script>
+    <script src="./assets/mode_selection.js"></script>
 </body>
 </html>

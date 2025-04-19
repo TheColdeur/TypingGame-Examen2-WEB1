@@ -104,6 +104,11 @@ header{
     color: var(--tertiaryColor);
     border-radius: 10px;
 }
+.time-select{
+    background: var(--quinaryColor);
+    color: var(--tertiaryColor);
+    border-radius: 10px;
+}
 .choice p{
     width: 80%;
     margin-bottom: .6em;

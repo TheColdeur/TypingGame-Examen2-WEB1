@@ -4,16 +4,46 @@ const wpmResult = document.querySelector('.WPM span');
 const mistakesResult = document.querySelector('.mistakes span');
 const time = document.querySelector('.time span');
 
-let currentTime = startTime = 30;
+const choice1 = document.querySelector('.choice-1');
+const choice2 = document.querySelector('.choice-2');
+const choice3 = document.querySelector('.choice-3');
+const choice4 = document.querySelector('.choice-4');
+
+choice1.classList.add('time-select');
+const isChoice1 = () => {
+    choice1.classList.add('time-select');
+    choice2.classList.remove('time-select');
+    choice3.classList.remove('time-select');
+    choice4.classList.remove('time-select');
+}
+const isChoice2 = () => {
+    choice2.classList.add('time-select');
+    choice1.classList.remove('time-select');
+    choice3.classList.remove('time-select');
+    choice4.classList.remove('time-select');
+}
+const isChoice3 = () => {
+    choice3.classList.add('time-select');
+    choice1.classList.remove('time-select');
+    choice2.classList.remove('time-select');
+    choice4.classList.remove('time-select');
+}
+const isChoice4 = () => {
+    choice4.classList.add('time-select');
+    choice1.classList.remove('time-select');
+    choice3.classList.remove('time-select');
+    choice2.classList.remove('time-select');
+}
+
 let wordCount = word2.length;
+let currentTime = startTime = 0;
 let characterIndex = 0;
 let mistakes = 0;
+let totalMistakes = 0;
 let firstChar = 0;
 
-time.innerHTML = startTime;
-
 const getWpm = () => {
-    const wpm = ((((characterIndex + 1) - mistakes) / 5) / (startTime - currentTime))*60;
+    const wpm = ((((characterIndex + 1) - totalMistakes) / 5) / ((startTime - currentTime)/60));
     return Math.round(wpm);
 }
 
@@ -31,6 +61,25 @@ const newGame = () => {
         typingText.innerHTML += word + `<span class="letter"> </span>`;
     }
     typingText.querySelector('.letter').classList.add('current');
+    
+    choice1.addEventListener('click', isChoice1);
+    choice1.addEventListener('click', newGame);
+    choice2.addEventListener('click', isChoice2);
+    choice2.addEventListener('click', newGame);
+    choice3.addEventListener('click', isChoice3);
+    choice3.addEventListener('click', newGame);
+    choice4.addEventListener('click', isChoice4);
+    choice4.addEventListener('click', newGame);
+    if (choice1.classList.contains('time-select')){
+        startTime = currentTime = parseInt(document.querySelector('.choice-1 span').innerHTML);
+    } else if (choice2.classList.contains('time-select')){
+        startTime = currentTime = parseInt(document.querySelector('.choice-2 span').innerHTML);
+    } else if (choice3.classList.contains('time-select')){
+        startTime = currentTime = parseInt(document.querySelector('.choice-3 span').innerHTML);
+    } else if (choice4.classList.contains('time-select')){
+        startTime = currentTime = parseInt(document.querySelector('.choice-4 span').innerHTML);
+    }
+    time.innerHTML = startTime;
 }
 const isTyping = (event) => {
     const letter = typingText.querySelectorAll('.letter');
@@ -55,6 +104,7 @@ const isTyping = (event) => {
             } else{
                 letter[characterIndex].classList.add('incorrect');
                 mistakes++;
+                totalMistakes++;
             }
             characterIndex++;
         }

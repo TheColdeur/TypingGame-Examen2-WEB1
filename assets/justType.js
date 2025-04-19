@@ -110,13 +110,12 @@ const isTyping = (event) => {
         }
         mistakesResult.innerHTML = mistakes;
         wpmResult.innerHTML = getWpm();
-        if (wpmResult.innerHTML == 'Infinity' || wpmResult.innerHTML == null){
+        if (wpmResult.innerHTML == 'Infinity' || wpmResult.innerHTML == null || wpmResult.innerHTML < 0){
             wpmResult.innerHTML = 0;
         }
     } else{
         inputField.innerHTML = '';
         clearInterval(timeLeft);
-        window.location.href = './result.html';
     }
     letter.forEach(span => span.classList.remove("current"));
     letter[characterIndex].classList.add("current");

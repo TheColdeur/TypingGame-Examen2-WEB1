@@ -78,6 +78,7 @@ header{
     flex-direction: column;
     padding: .5em;
     gap: 10px;
+    transition: all .8s;
 }
 .info .description .name{
     border-bottom: gray 2px solid;
@@ -87,6 +88,48 @@ header{
 .info .description-text{
     text-align: center;
     font-size: .7em;
+}
+.info .choice{
+    display: none;
+}
+.choice h5{
+    width: 100%;
+    padding: .5em 0;
+    font-size: .8em;
+    cursor: pointer;
+    transition: all .7s;
+}
+.choice h5:hover{
+    background: var(--quinaryColor);
+    color: var(--tertiaryColor);
+    border-radius: 10px;
+}
+.choice p{
+    width: 80%;
+    margin-bottom: .6em;
+    font-size: .9em;
+    font-weight: 700;
+    padding-bottom: .3em;
+    border-bottom: gray 2px solid;
+    color: var(--quaternaryColor);
+}
+.description:hover{
+    background: var(--secondaryColor);
+    color: var(--quinaryColor);
+    border: var(--secondaryColor);
+}
+.description:hover .name{
+    display: none;
+}
+.description:hover .description-text{
+    display: none;
+}
+.description:hover .choice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .game{
     height: 50vh;
@@ -225,14 +268,19 @@ header{
     outline: none;
     padding: .5em 2em;
     cursor: pointer;
-    border: 1px solid #fff;
+    border: 2px solid var(--quinaryColor);
+    border-radius: 10px;
+    transition: all .5s;
+}
+.option button:hover{
+    background: var(--quinaryColor);
+}
+.option button:hover i{
+    color: var(--primaryColor);
 }
 .option i{
     font-size: 1.6em;
     font-weight: 600;
     color: var(--quaternaryColor);
     transition: all .5s;
-}
-.option i:hover{
-    color: #F2E2B1;
 }
